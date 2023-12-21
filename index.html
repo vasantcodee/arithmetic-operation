@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+</head>
+<body>
+    <form onsubmit="return false;">
+        <label for="operation">Enter your operation:</label>
+        <input type="text" id="operation">
+        <button onclick="performOperation()">Submit</button>
+        <div id="number1" style="display:none;">
+            <label for="num1">Enter number 1:</label>
+            <input type="text" id="num1">
+        </div>
+        <div id="number2" style="display:none;">
+            <label for="num2">Enter number 2:</label>
+            <input type="text" id="num2">
+        </div>
+        <button onclick="calculate()">Calculate</button>
+        <div id="output"></div>
+        <button onclick="resetForm()">Back</button>
+    </form>
+
+    <script>
+        function performOperation() {
+            const operation = document.getElementById("operation").value.toLowerCase();
+
+            if (operation === 'add' || operation === 'subtract' || operation === 'multiply' || operation === 'divide') {
+                document.getElementById("number1").style.display = 'block';
+                document.getElementById("number2").style.display = 'block';
+            } else {
+                document.getElementById("output").innerText = 'Invalid operation please enter arithmetic';
+                
+            }
+        }
+
+        function calculate() {
+            const num1 = parseFloat(document.getElementById("num1").value) || 0;
+            const num2 = parseFloat(document.getElementById("num2").value) || 0;
+            const operation = document.getElementById("operation").value.toLowerCase();
+            let result;
+
+            switch (operation) {
+                case 'add':
+                    result = num1 + num2;
+                    break;
+                case 'subtract':
+                    result = num1 - num2;
+                    break;
+                case 'multiply':
+                    result = num1 * num2;
+                    break;
+                case 'divide':
+                    result = num1 / num2;
+                    break;
+                default:
+                    result = 'Invalid operation.';
+            }
+
+            document.getElementById("output").innerText = `Result: ${result}`;
+        }
+
+        function resetForm() {
+            document.getElementById("operation").value = '';
+            document.getElementById("num1").value = '';
+            document.getElementById("num2").value = '';
+            document.getElementById("output").innerText = '';
+            document.getElementById("number1").style.display = 'none';
+            document.getElementById("number2").style.display = 'none';
+        }
+    </script>
+</body>
+</html>
